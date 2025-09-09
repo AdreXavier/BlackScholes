@@ -41,6 +41,14 @@
             font-weight: 500;
             color: #4A5568;
         }
+        .event-list a {
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .event-list a:hover .font-semibold {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800 p-4 sm:p-6 lg:p-8">
@@ -79,6 +87,7 @@
                 <div>
                     <h3 class="text-xl font-semibold mb-2 text-purple-700">Reuniões</h3>
                     <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Dia 6:</strong> <a href="https://docs.google.com/document/d/1hi3EL5atHK-tqsVCOwfpwh1F4Ai4MIq43aoYeD9Zu-I/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-purple-700 hover:underline">Reunião desafio quant AI</a></li>
                         <li><strong>Dia 10 (18h):</strong> Reunião de planejamento.</li>
                         <li><strong>Dia 13 (14:30h):</strong> Reunião para membros do Desafio Quant AI Itaú.</li>
                         <li><strong>Dia 17 (18h):</strong> Segunda reunião de planejamento.</li>
@@ -116,6 +125,7 @@
             const month = 8; // 0-indexed for JavaScript Date (0=Jan, 8=Sep)
 
             const events = {
+                '6': [{ title: 'Reunião desafio quant AI', color: 'purple', link: 'https://docs.google.com/document/d/1hi3EL5atHK-tqsVCOwfpwh1F4Ai4MIq43aoYeD9Zu-I/edit?usp=sharing' }],
                 '10': [{ title: 'Reunião de planejamento', color: 'purple' }],
                 '13': [{ title: 'Reunião Desafio Quant AI', color: 'purple' }],
                 '17': [{ title: '2ª Reunião de planejamento', color: 'purple' }],
@@ -182,7 +192,13 @@
                 if (events[day]) {
                     events[day].forEach(event => {
                         const colorClass = colorClasses[event.color] || 'text-gray-900';
-                        eventHtml += `<div class="font-semibold ${colorClass}">${event.title}</div>`;
+                        const eventContent = `<div class="font-semibold ${colorClass}">${event.title}</div>`;
+                        
+                        if (event.link) {
+                            eventHtml += `<a href="${event.link}" target="_blank" rel="noopener noreferrer">${eventContent}</a>`;
+                        } else {
+                            eventHtml += eventContent;
+                        }
                     });
                 }
                 eventHtml += '</div>';
@@ -217,3 +233,4 @@
 
 </body>
 </html>
+
